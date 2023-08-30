@@ -12,6 +12,8 @@ import Foundation
 @MainActor
 final class SignInEmailViewModel: ObservableObject {
     
+    
+    
     @Published var email = ""
     @Published var password = ""
     

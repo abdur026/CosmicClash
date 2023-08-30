@@ -29,7 +29,7 @@
 		37D46B142A971DBB000B0463 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 37D46B132A971DBB000B0463 /* FirebaseFirestoreSwift */; };
 		37D46B152A9722D7000B0463 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5D6422A1453BD00D8E3C6 /* ContentView.swift */; };
 		37DAD36E2A8F3E9500E51F39 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37DAD36D2A8F3E9500E51F39 /* intro.mp3 */; };
-		37DF35F62A9B275300BF3CB3 /* bullets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37DF35F52A9B275300BF3CB3 /* bullets.mp3 */; };
+		37DF35FA2A9F130E00BF3CB3 /* bullets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37DF35F92A9F130E00BF3CB3 /* bullets.mp3 */; };
 		37E5D6412A1453BD00D8E3C6 /* CosmicClashApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5D6402A1453BD00D8E3C6 /* CosmicClashApp.swift */; };
 		37E5D6452A1453BF00D8E3C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5D6442A1453BF00D8E3C6 /* Assets.xcassets */; };
 		37E5D6492A1453BF00D8E3C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5D6482A1453BF00D8E3C6 /* Preview Assets.xcassets */; };
@@ -48,7 +48,7 @@
 		375A5BA32A94A3260089A2F0 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		375A5BA52A94A5A30089A2F0 /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
 		37DAD36D2A8F3E9500E51F39 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = intro.mp3; sourceTree = "<group>"; };
-		37DF35F52A9B275300BF3CB3 /* bullets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullets.mp3; sourceTree = "<group>"; };
+		37DF35F92A9F130E00BF3CB3 /* bullets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullets.mp3; sourceTree = "<group>"; };
 		37E5D63D2A1453BD00D8E3C6 /* CosmicClash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmicClash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5D6402A1453BD00D8E3C6 /* CosmicClashApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmicClashApp.swift; sourceTree = "<group>"; };
 		37E5D6422A1453BD00D8E3C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				37292C412A9096F8009E4E55 /* gameover.mp3 */,
-				37DF35F52A9B275300BF3CB3 /* bullets.mp3 */,
+				37DF35F92A9F130E00BF3CB3 /* bullets.mp3 */,
 				37DAD36D2A8F3E9500E51F39 /* intro.mp3 */,
 			);
 			path = Sounds;
@@ -240,7 +240,7 @@
 				37E5D6492A1453BF00D8E3C6 /* Preview Assets.xcassets in Resources */,
 				37E5D6452A1453BF00D8E3C6 /* Assets.xcassets in Resources */,
 				37DAD36E2A8F3E9500E51F39 /* intro.mp3 in Resources */,
-				37DF35F62A9B275300BF3CB3 /* bullets.mp3 in Resources */,
+				37DF35FA2A9F130E00BF3CB3 /* bullets.mp3 in Resources */,
 				375A5B812A9343A10089A2F0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
