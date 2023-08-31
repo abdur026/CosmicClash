@@ -43,6 +43,8 @@ struct ContentView: View {
     
     @State private var user: User?
     
+    @State private var enemyHitPoints: [UUID: Int] = [:]
+
     var body: some View {
         
         ZStack {
@@ -602,39 +604,58 @@ struct ContentView: View {
             
         }
         
-        private func startScoreTimer() {
-            
-            guard !pausePressed else {
-                   return
-               }
-            timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
-                score += 1
-                
-                var spawnProbability = 20
-                
-                if score > 20*33 && score <= 40*33 {
-                    spawnProbability = 15
-                } else if score > 40*33 && score <= 60*33 {
-                    spawnProbability = 10
-                } else if score > 60*33 {
-                    spawnProbability = 5
-                }
-                
-                if Int.random(in: 0..<spawnProbability) == 0 {
-                    spawnEnemy()
-                }
-                
-                
-                
-                if rocketCollidesWithAnyEnemy() {
-                    gameOver = true
-                    stopScoreTimer()
-                    gameOverImage = "gameover" // Set the image name to "gameover"
-                }
-                updateTopScoreIfNeeded(newScore: score)
-            }
+    private func startScoreTimer() {
+        guard !pausePressed else {
+            return
         }
-    
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
+            score += 1
+            
+            var spawnProbability = 20
+            
+            if score > 20 * 33 && score <= 40 * 33 {
+                spawnProbability = 15
+            } else if score > 40 * 33 && score <= 60 * 33 {
+                spawnProbability = 10
+            } else if score > 60 * 33 {
+                spawnProbability = 5
+            }
+            
+            if Int.random(in: 0..<spawnProbability) == 0 {
+                spawnEnemy()
+            }
+            
+            if score > 1400 && Int.random(in: 0..<spawnProbability) == 5 {
+                spawnBoss()
+            }
+            
+            if rocketCollidesWithAnyEnemy() {
+                gameOver = true
+                stopScoreTimer()
+                gameOverImage = "gameover" // Set the image name to "gameover"
+            }
+            
+            updateTopScoreIfNeeded(newScore: score)
+        }
+    }
+
+    private func spawnBoss() {
+        guard !pausePressed else {
+            return
+        }
+        
+        let bossSize: CGFloat = 60  // set a constant size
+        let startPositionX: CGFloat = CGFloat.random(in: 0...550)
+        
+        let newBoss = EnemyModel(position: CGPoint(x: startPositionX, y: -bossSize), size: bossSize, image: "boss")
+        let bossHitPoints = 3
+        
+        enemies.append(newBoss)
+        enemyHitPoints[newBoss.id] = bossHitPoints
+        startEnemyMovement(for: newBoss)
+    }
+
         
         
         private func rocketCollidesWithAnyEnemy() -> Bool {
@@ -681,6 +702,7 @@ struct ContentView: View {
             var position: CGPoint
             let size: CGFloat
             let image: String // Add this property to store the image name
+            
         }
         
         
@@ -795,12 +817,19 @@ struct ContentView: View {
                     } else {
                         // Check for collisions with enemies
                         for (enemyIndex, enemy) in enemies.enumerated() {
-                            if collides(circle: currentCircle, enemy: enemy) {
-                                enemies.remove(at: enemyIndex)
-                                circles.remove(at: index)
-                                timer.invalidate()
-                                return // Return to exit the loop and prevent invalid array access
-                            }
+                                    if collides(circle: currentCircle, enemy: enemy) {
+                                        var updatedHitPoints = enemyHitPoints
+                                        if let currentHitPoints = updatedHitPoints[enemy.id], currentHitPoints > 1 {
+                                            updatedHitPoints[enemy.id] = currentHitPoints - 1 // Reduce hit points
+                                            enemyHitPoints = updatedHitPoints
+                                        } else {
+                                            enemies.remove(at: enemyIndex)
+                                            enemyHitPoints.removeValue(forKey: enemy.id)
+                                        }
+                                        circles.remove(at: index)
+                                        timer.invalidate()
+                                        return // Return to exit the loop and prevent invalid array access
+                                    }
                         }
                     }
                     
