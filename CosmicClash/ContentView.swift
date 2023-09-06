@@ -626,7 +626,7 @@ struct ContentView: View {
                 spawnEnemy()
             }
             
-            if score > 1400 && Int.random(in: 0..<spawnProbability) == 5 {
+            if score > 2000 && Int.random(in: 0..<spawnProbability) == 5 {
                 spawnBoss()
             }
             
