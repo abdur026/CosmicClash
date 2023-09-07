@@ -68,8 +68,8 @@ struct ContentView: View {
                         
                         
                         ForEach(circles) { circle in
-                            Image("bullet")  // Use the "bullet" image
-                                .resizable()  // Make the image resizable
+                            Image("bullet")
+                                .resizable()
                                 .frame(width: circle.size, height: circle.size)
                                 .position(circle.position)
                             
@@ -77,7 +77,7 @@ struct ContentView: View {
                         
                         
                         ForEach(enemies) { enemy in
-                            Image(enemy.image) // Use the image from the enemy model
+                            Image(enemy.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: enemy.size, height: enemy.size)
@@ -100,8 +100,8 @@ struct ContentView: View {
                         if pausePressed {
                             ZStack {
                                 Image("space2")
-                                    .resizable()  // Make sure the image resizes
-                                    .edgesIgnoringSafeArea(.all)  // Ensure it covers the whole screen
+                                    .resizable()
+                                    .edgesIgnoringSafeArea(.all)
                                 
                                 VStack(spacing: 20) {
                                     resumeButtonView(resumePressed: $resumePressed, pausePressed: $pausePressed)
@@ -110,7 +110,7 @@ struct ContentView: View {
                                 }
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .edgesIgnoringSafeArea(.all)  // Make sure the ZStack covers the entire screen
+                            .edgesIgnoringSafeArea(.all)
                         }
                         
                     if gameOver {
@@ -126,7 +126,7 @@ struct ContentView: View {
                                     }
                                 }
                             Button(action: {
-                                restartGame() // Return to the main menu
+                                restartGame()
                             }) {
                                 Image(systemName: "play.rectangle.fill")
                                     .font(.system(size: 75))
@@ -137,7 +137,7 @@ struct ContentView: View {
                             .position(x: 120, y: 580)
                             
                             Button(action: {
-                                playPressed = false // Return to the main menu
+                                playPressed = false
                             }) {
                                 Image(systemName: "house.fill")
                                     .font(.system(size: 55))
@@ -187,13 +187,13 @@ struct ContentView: View {
             if LeaderBoardPressed {
                 ZStack {
                     Color.black.opacity(0.7)
-                        .edgesIgnoringSafeArea(.all) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
                     
                     LeaderboardView(LeaderBoardPressed: $LeaderBoardPressed, userTopScore: user?.topScore ?? 0)
                         .onAppear {
-                            fetchUserData() // Fetch user data from Firestore
+                            fetchUserData()
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity) // Full screen
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.black)
                         .cornerRadius(15)
                         .shadow(radius: 1)
@@ -245,7 +245,7 @@ struct ContentView: View {
                         user = User(id: authUser.uid, topScore: topScore)
                     }
                 } else {
-                    // Document doesn't exist, create a new one
+                    
                     let newUser = User(id: authUser.uid, topScore: 0)
                     userDocRef.setData(["topScore": 0])
                     user = newUser
@@ -460,7 +460,7 @@ struct ContentView: View {
         }
     struct LeaderboardView: View {
         @Binding var LeaderBoardPressed: Bool
-        var userTopScore: Int // Pass the user's top score instead of dummy scores
+        var userTopScore: Int
         
         var body: some View {
             ZStack {
@@ -472,7 +472,7 @@ struct ContentView: View {
                         .font(.title)
                         .foregroundColor(.white)
                     
-                    Text("\(userTopScore)") // Display the user's top score
+                    Text("\(userTopScore)")
                         .font(.title)
                         .foregroundColor(.yellow)
                     
@@ -510,7 +510,7 @@ struct ContentView: View {
                     pausePressed = false
                 }) {
                     HStack {
-                        Image(systemName: "play.fill") // SF Symbol for play
+                        Image(systemName: "play.fill")
                             .font(.title)
                         Text("Resume")
                             .font(.title)
@@ -540,7 +540,7 @@ struct ContentView: View {
                     homePressed = true
                 }) {
                     HStack {
-                        Image(systemName: "house.fill") // SF Symbol for home
+                        Image(systemName: "house.fill") 
                             .font(.title)
                         Text("Main Menu")
                             .font(.title)
@@ -590,8 +590,8 @@ struct ContentView: View {
                     motionManager.startDeviceMotionUpdates(to: .main) { (motionData, error) in
                         if let motionData = motionData {
                             let tilt = motionData.attitude.roll
-                            translationX = CGFloat(tilt) * 100 // Adjust the sensitivity as needed
-                            externalTranslationX = translationX // Update the external translation as well
+                            translationX = CGFloat(tilt) * 100
+                            externalTranslationX = translationX
                         }
                     }
                 }
@@ -633,7 +633,7 @@ struct ContentView: View {
             if rocketCollidesWithAnyEnemy() {
                 gameOver = true
                 stopScoreTimer()
-                gameOverImage = "gameover" // Set the image name to "gameover"
+                gameOverImage = "gameover"
             }
             
             updateTopScoreIfNeeded(newScore: score)
@@ -645,7 +645,7 @@ struct ContentView: View {
             return
         }
         
-        let bossSize: CGFloat = 60  // set a constant size
+        let bossSize: CGFloat = 60
         let startPositionX: CGFloat = CGFloat.random(in: 0...550)
         
         let newBoss = EnemyModel(position: CGPoint(x: startPositionX, y: -bossSize), size: bossSize, image: "boss")
@@ -660,8 +660,8 @@ struct ContentView: View {
         
         private func rocketCollidesWithAnyEnemy() -> Bool {
             
-            let rocketWidth: CGFloat = 35 // Adjust if the size of the rocket changes
-            let rocketHeight: CGFloat = 50 // Adjust if the height of the rocket changes
+            let rocketWidth: CGFloat = 35
+            let rocketHeight: CGFloat = 50
             
             let rocketFrame = CGRect(x: rocketPositionX + translationX - rocketWidth / 2,
                                      y: 760 - rocketHeight,
@@ -701,7 +701,7 @@ struct ContentView: View {
             let id = UUID()
             var position: CGPoint
             let size: CGFloat
-            let image: String // Add this property to store the image name
+            let image: String
             
         }
         
@@ -711,10 +711,10 @@ struct ContentView: View {
             guard !pausePressed else {
                    return
                }
-            let enemySize: CGFloat = 30  // set a constant size
+            let enemySize: CGFloat = 30
             let startPositionX: CGFloat = CGFloat.random(in: 0...550)
             
-            // Randomly pick an image name
+           
             let enemyImageName = Bool.random() ? "enemy" : "enemy2"
             
             let newEnemy = EnemyModel(position: CGPoint(x: startPositionX, y: -enemySize), size: enemySize, image: enemyImageName)
@@ -727,14 +727,14 @@ struct ContentView: View {
             guard !pausePressed else {
                 return
             }
-            // Randomize the amplitude, frequency, and ySpeed for each enemy
-            let amplitude: CGFloat = CGFloat.random(in: 100.0...200.0)  // Determines the amplitude of the sinusoidal pattern
-            let frequency: CGFloat = CGFloat.random(in: 0.03...0.07)  // Determines the frequency of the sinusoidal pattern
-            let ySpeed: CGFloat = CGFloat.random(in: 4.0...6.0)      // Determines the speed of the enemy's descent
-            var time: CGFloat = 0.0  // This will be incremented to change the phase of the sine wave
+           
+            let amplitude: CGFloat = CGFloat.random(in: 100.0...200.0)
+            let frequency: CGFloat = CGFloat.random(in: 0.03...0.07)
+            let ySpeed: CGFloat = CGFloat.random(in: 4.0...6.0)
+            var time: CGFloat = 0.0
             
-            let startingXPosition = enemy.position.x  // Capture the starting X position when function is called
-            var initialYPosition: CGFloat = -200  // Initial y-coordinate where the enemy spawns
+            let startingXPosition = enemy.position.x
+            var initialYPosition: CGFloat = -200
             
             _ = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
                 guard let index = enemies.firstIndex(where: { $0.id == enemy.id }) else {
@@ -745,11 +745,9 @@ struct ContentView: View {
                 var updatedEnemy = enemy
                 time += frequency
                 
-                let xOffset = sin(time) * amplitude  // Sine wave for left and right motion
-                
-                // Update x-coordinate based on the sine wave and y-coordinate moves downward linearly
+                let xOffset = sin(time) * amplitude
                 let updatedPosition = CGPoint(x: startingXPosition + xOffset, y: initialYPosition + ySpeed)
-                initialYPosition += ySpeed  // Move the initial position downward
+                initialYPosition += ySpeed  
                 
                 updatedEnemy.position = updatedPosition
                 enemies[index] = updatedEnemy
@@ -776,7 +774,7 @@ struct ContentView: View {
             let relativeStartPositionX: CGFloat = 0.0
             let newCircle = CircleModel(position: CGPoint(x: rocketPositionX + relativeStartPositionX + translationX, y: 760 - 70), size: circleSize)
             circles.append(newCircle)
-            if isSoundOn { // Check if sound is not muted
+            if isSoundOn {
                 playBulletSound()
             }
             startShootingTimer(for: newCircle)
@@ -795,7 +793,7 @@ struct ContentView: View {
             guard !pausePressed else {
                 return
             }
-            let initialYPosition: CGFloat = circle.position.y  // Store the starting y-coordinate
+            let initialYPosition: CGFloat = circle.position.y
             
             _ = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
                 withAnimation {
@@ -804,15 +802,15 @@ struct ContentView: View {
                         return
                     }
                     
-                    var currentCircle = circles[index]  // Use the updated circle from the array for each iteration
-                    let updatedPosition = CGPoint(x: currentCircle.position.x, y: currentCircle.position.y - 5) // Subtract only 5 from y-coordinate to move bullet up progressively
+                    var currentCircle = circles[index]
+                    let updatedPosition = CGPoint(x: currentCircle.position.x, y: currentCircle.position.y - 5)
                     currentCircle.position = updatedPosition
                     circles[index] = currentCircle
                     
-                    if updatedPosition.y <= 0 || (initialYPosition - updatedPosition.y) >= 700 {  // Check if bullet has reached the top of the screen or moved up 700 units
+                    if updatedPosition.y <= 0 || (initialYPosition - updatedPosition.y) >= 700 {
                         timer.invalidate()
                         DispatchQueue.main.async {
-                            circles.removeAll(where: { $0.id == circle.id }) // Remove the bullet from the array
+                            circles.removeAll(where: { $0.id == circle.id })
                         }
                     } else {
                         // Check for collisions with enemies
@@ -820,7 +818,7 @@ struct ContentView: View {
                                     if collides(circle: currentCircle, enemy: enemy) {
                                         var updatedHitPoints = enemyHitPoints
                                         if let currentHitPoints = updatedHitPoints[enemy.id], currentHitPoints > 1 {
-                                            updatedHitPoints[enemy.id] = currentHitPoints - 1 // Reduce hit points
+                                            updatedHitPoints[enemy.id] = currentHitPoints - 1
                                             enemyHitPoints = updatedHitPoints
                                         } else {
                                             enemies.remove(at: enemyIndex)
@@ -828,7 +826,7 @@ struct ContentView: View {
                                         }
                                         circles.remove(at: index)
                                         timer.invalidate()
-                                        return // Return to exit the loop and prevent invalid array access
+                                        return
                                     }
                         }
                     }
