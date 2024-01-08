@@ -15,7 +15,7 @@ To enjoy the Rocketship Game, follow these simple steps:
 - Open Terminal and navigate to the directory where you want to store the project.
 - Run the following command to clone the repository:
 ```
-git clone https://github.com/your-username/rocketship-game.git
+git clone https://github.com/abdur026/CosmicClash.git
 ```
 3. **Open the Project:**
 
